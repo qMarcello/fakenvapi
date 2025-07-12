@@ -32,7 +32,7 @@ jobs:
           & "${Env:COMSPEC}" /s /c "`"${Env:VSDEVCMD}`" -arch=x64 -host_arch=x64 -no_logo && set" `
             | % { , ($_ -Split '=', 2) } `
             | % { [System.Environment]::SetEnvironmentVariable($_[0], $_[1]) }
-          meson setup --buildtype release --backend vs2022 --default-library both --wipe build-msvc-x64
+          meson setup --buildtype release --backend vs2022 --wipe build-msvc-x64
           meson compile -C build-msvc-x64
 
       - name: Prepare files
