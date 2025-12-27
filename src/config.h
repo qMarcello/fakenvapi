@@ -19,7 +19,7 @@ enum class LFXMode {
 class Config {
     wchar_t path[MAX_PATH];
 
-    bool _enable_logs = true;
+    bool _enable_logs = false;
     bool _enable_trace_logs = false;
     bool _force_latencyflex = false;
     LFXMode _latencyflex_mode = LFXMode::Conservative;
@@ -46,7 +46,7 @@ class Config {
     void update_config() {
         update.lock();
 
-        _enable_logs       = get_config(L"fakenvapi", L"enable_logs",       true);
+        _enable_logs       = get_config(L"fakenvapi", L"enable_logs",       false);
         _enable_trace_logs = get_config(L"fakenvapi", L"enable_trace_logs", false);
         _force_latencyflex = get_config(L"fakenvapi", L"force_latencyflex", false);
         _save_pcl_to_file  = get_config(L"fakenvapi", L"save_pcl_to_file",  false);
@@ -72,7 +72,7 @@ class Config {
         spdlog::info("Config updated ---------------");
 
         // TODO: make it a function
-        spdlog::info("Config enable_trace_logs: {}", _enable_trace_logs ? "true" : "false");
+        spdlog::info("Config enable_trace_logs: {}", _enable_trace_logs ? "false" : "false");
         spdlog::info("Config force_latencyflex: {}", _force_latencyflex ? "true" : "false");
         spdlog::info("Config force_reflex: {}", (int)_force_reflex);
         spdlog::info("Config lfx_mode: {}", (int)_latencyflex_mode);
